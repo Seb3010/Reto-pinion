@@ -1,0 +1,8 @@
+body {
+background-color: rgb(139, 13, 139);
+}
+
+#title {
+    border-color: black;
+    border-radius: 5px;
+}
