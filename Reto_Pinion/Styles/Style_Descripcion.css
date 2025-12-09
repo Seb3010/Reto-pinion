@@ -29,6 +29,9 @@ footer{
     border-top-right-radius: 0.5rem;
     padding: 1rem;
     color: white;
-    animation: EnterFromRight 3s ease;
     box-sizing: border-box;
+}
+
+footer a{
+    float: rigth;
 }
