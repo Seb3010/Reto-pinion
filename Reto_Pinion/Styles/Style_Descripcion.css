@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(135deg, #bd11bd 0%, #7a0d7a 50%, #3d063d 100%);
+    background: linear-gradient(135deg, #bd11bd 0%, #7a0d7a 50%, #3d063d 100%) !important;
     text-align: center;
     min-height: 100vh;
 }
