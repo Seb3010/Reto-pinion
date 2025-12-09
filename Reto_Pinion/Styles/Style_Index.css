@@ -1,0 +1,9 @@
+body {
+    background: linear-gradient(to bottom, rgb(189, 17, 189), rgb(150, 17, 150), rgb(80, 10, 80));
+    text-align: center;
+}
+
+.next {
+    width: 20px;
+    height: 10px;
+}
