@@ -1,4 +1,4 @@
 body {
-    background-color: linear-gradient(to button, rgb(189, 17, 189), rgb(134, 17, 134));
+    background: linear-gradient(to buttom, rgb(189, 17, 189), rgb(134, 17, 134));
     text-align: center;
 }
