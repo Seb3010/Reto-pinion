@@ -20,3 +20,15 @@ footer {
 button {
     color: black;
 }
+
+footer{
+    width: 100%;  
+    background-color: #222;
+    border-top: 0.1rem;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    padding: 1rem;
+    color: white;
+    animation: EnterFromRight 3s ease;
+    box-sizing: border-box;
+}
