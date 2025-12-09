@@ -11,3 +11,8 @@ article {
     width: 400px;
     margin: 0 auto;
 }
+
+footer {
+    border-top: 10px;
+    border-radius: 10px;
+}
