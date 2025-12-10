@@ -1,3 +1,26 @@
+@keyframes EnterFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes EnterFromRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
 body {
     background: linear-gradient(135deg, #bd11bd 0%, #7a0d7a 50%, #3d063d 100%);
     text-align: center;
