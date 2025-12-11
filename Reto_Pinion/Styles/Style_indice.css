@@ -53,7 +53,7 @@ header {
     padding: 40px;
 }   
 
-#problematica, #resolver, #proceso, #descripcion {
+#problematica, #resolver, #proceso, #descripicion {
     height: 100px;
     width: 150px;
     background-color: white;
@@ -65,7 +65,7 @@ header {
     transition: all 0.2s ease;
 }
 
-#problematica:hover, #resolver:hover, #proceso:hover, #descripcion:hover {
+#problematica:hover, #resolver:hover, #proceso:hover, #descripicion:hover {
     background-color: white;
     transform: scale(1.05);
 }
