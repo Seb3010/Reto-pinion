@@ -33,8 +33,15 @@ body {
 
 
 .next {
-    width: 100px;
-    height: 150px;
+    height: 100px;
+    width: 150px;
+    background-color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 2px solid black;
+    box-shadow: 8px 8px 12px rgba(0,0,0,0.2);
+    transition: all 0.2s ease;
 }
 
 button {
