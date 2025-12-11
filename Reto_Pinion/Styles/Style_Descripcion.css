@@ -8,6 +8,7 @@ article {
     border-radius: 5px;
     background-color: white;
     margin: 0 auto;
+    width: 700px;
 }
 
 footer {
@@ -39,4 +40,10 @@ footer{
 
 footer a{
     float: rigth;
+}
+
+@media (max-width: 480px) {
+    article {
+        width: 400px;
+    }
 }
