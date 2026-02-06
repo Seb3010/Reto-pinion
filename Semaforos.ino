@@ -157,12 +157,10 @@ void loop() {
   
   delay(tiempo_verde); // Mantener esta configuración por 5 segundos
   
-  /*
-   * -----------------------------------------------------------------------------------
-   * TRANSICIÓN DE AV. PATRIA: VERDE → AMARILLO → ROJO
-   * -----------------------------------------------------------------------------------
-   * Esta transición alerta a los conductores que deben prepararse para detenerse
-   */
+/*
+    * TRANSICIÓN DE AV. PATRIA: VERDE → AMARILLO → ROJO
+    * Esta transición alerta a los conductores que deben prepararse para detenerse
+    */
   
   // 3. PASAR A AMARILLO en semáforos de Av. Patria
   // Semáforo 1 (Norte): VERDE → AMARILLO
@@ -210,12 +208,10 @@ void loop() {
   
   delay(tiempo_verde); // Mantener esta configuración por 5 segundos
   
-  /*
-   * -----------------------------------------------------------------------------------
-   * TRANSICIÓN DE AV. MARIANO OTERO: VERDE → AMARILLO → ROJO
-   * -----------------------------------------------------------------------------------
-   * Transición simétrica a la de Av. Patria para completar el ciclo
-   */
+/*
+    * TRANSICIÓN DE AV. MARIANO OTERO: VERDE → AMARILLO → ROJO
+    * Transición simétrica a la de Av. Patria para completar el ciclo
+    */
   
   // 6. PASAR A AMARILLO en semáforos de Av. Mariano Otero
   // Semáforo 3 (Este): VERDE → AMARILLO

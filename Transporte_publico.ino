@@ -486,11 +486,9 @@ const char index_html[] PROGMEM = R"rawliteral(
       // pero en el puerto 81 (configurado en el servidor ESP32)
       var connection = new WebSocket('ws://' + location.hostname + ':81/');
 
-      /*
-       * -----------------------------------------------------------------------------------
-       * MANEJADORES DE EVENTOS WEBSOCKET
-       * -----------------------------------------------------------------------------------
-       */
+/*
+        * MANEJADORES DE EVENTOS WEBSOCKET
+        */
 
       // CONEXIÓN ESTABLECIDA: Mostrar indicador de estado conectado
       connection.onopen = function () {
@@ -504,14 +502,12 @@ const char index_html[] PROGMEM = R"rawliteral(
         document.getElementById('estado').classList.remove('connected');
       };
 
-      /*
-       * -----------------------------------------------------------------------------------
-       * VARIABLES DE ANIMACIÓN Y POSICIÓN
-       * -----------------------------------------------------------------------------------
-       * 
-       * El sistema utiliza interpolación lineal (LERP) para movimiento suave
-       * entre la posición actual y la posición objetivo recibida por WebSocket.
-       */
+/*
+        * VARIABLES DE ANIMACIÓN Y POSICIÓN
+        * 
+        * El sistema utiliza interpolación lineal (LERP) para movimiento suave
+        * entre la posición actual y la posición objetivo recibida por WebSocket.
+        */
       
       var currentX = 211;  // Posición actual X del vehículo en pantalla
       var currentY = 205;  // Posición actual Y del vehículo en pantalla
@@ -523,11 +519,9 @@ const char index_html[] PROGMEM = R"rawliteral(
       var lastY = 205;     // Posición Y del frame anterior (para cálculo de velocidad)
       var currentSpeed = 0; // Velocidad actual calculada
 
-      /*
-       * -----------------------------------------------------------------------------------
-       * FUNCIONES DE UTILIDAD
-       * -----------------------------------------------------------------------------------
-       */
+/*
+        * FUNCIONES DE UTILIDAD
+        */
 
       // INTERPOLACIÓN LINEAL (LERP): Calcula punto intermedio entre start y end
       // Permite movimiento suave en lugar de saltos instantáneos
@@ -569,14 +563,12 @@ const char index_html[] PROGMEM = R"rawliteral(
         gearElement.textContent = gear;
       }
 
-      /*
-       * -----------------------------------------------------------------------------------
-       * BUCLE DE ANIMACIÓN PRINCIPAL
-       * -----------------------------------------------------------------------------------
-       * 
-       * Esta función se ejecuta continuamente usando requestAnimationFrame
-       * para animación fluida sincronizada con el refresco del navegador (~60Hz).
-       */
+/*
+        * BUCLE DE ANIMACIÓN PRINCIPAL
+        * 
+        * Esta función se ejecuta continuamente usando requestAnimationFrame
+        * para animación fluida sincronizada con el refresco del navegador (~60Hz).
+        */
       function animate() {
         // INTERPOLAR POSICIÓN: Mover gradualmente hacia el objetivo
         currentX = lerp(currentX, targetX, lerpFactor);
@@ -619,14 +611,12 @@ const char index_html[] PROGMEM = R"rawliteral(
       lastX = currentX;
       lastY = currentY;
 
-      /*
-       * -----------------------------------------------------------------------------------
-       * MANEJADOR DE MENSAJES WEBSOCKET
-       * -----------------------------------------------------------------------------------
-       * 
-       * Esta función se ejecuta cada vez que el ESP32 envía datos por WebSocket.
-       * Recibe coordenadas actualizadas y las establece como objetivo de animación.
-       */
+/*
+        * MANEJADOR DE MENSAJES WEBSOCKET
+        * 
+        * Esta función se ejecuta cada vez que el ESP32 envía datos por WebSocket.
+        * Recibe coordenadas actualizadas y las establece como objetivo de animación.
+        */
       connection.onmessage = function (event) {
         var datos = JSON.parse(event.data); // Parsear JSON recibido: {"x":211,"y":205}
         targetX = datos.x;  // Establecer posición X objetivo
@@ -721,9 +711,7 @@ void loop() {
     lastUpdate = millis(); // Actualizar timestamp para siguiente ciclo
 
     /*
-     * -----------------------------------------------------------------------------------
      * LECTURA Y PROCESAMIENTO DEL JOYSTICK
-     * -----------------------------------------------------------------------------------
      * 
      * El joystick proporciona valores analógicos de 0-4095:
      * - Centro: ~2048 (sin movimiento)
@@ -780,9 +768,7 @@ void loop() {
     // NOTA: Si está entre 1800-2200, velY permanece en 0 (sin movimiento vertical)
 
     /*
-     * -----------------------------------------------------------------------------------
      * ACTUALIZACIÓN DE POSICIÓN Y LÍMITES
-     * -----------------------------------------------------------------------------------
      */
 
     // ACTUALIZAR POSICIÓN ACUMULADA
@@ -796,9 +782,7 @@ void loop() {
     // NOTA: Estos límites dependen del tamaño del mapa y elemento visual
 
     /*
-     * -----------------------------------------------------------------------------------
      * ENVÍO DE DATOS POR WEBSOCKET
-     * -----------------------------------------------------------------------------------
      * 
      * Solo se envían datos si hay cambios de posición para optimizar ancho de banda.
      * El sistema envía las coordenadas a TODOS los clientes conectados (broadcast).
