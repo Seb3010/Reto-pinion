@@ -230,7 +230,7 @@ Proyecto desarrollado para el **Reto Piñón** - Competencia de innovación tecn
 
 ## Licencia
 
-TruckTracker es una app de codigo abierto, libre para su uso y modificacion. EL copyright y la autoria del material intelctual del proyecto pertencen al equipo bongos
+TruckTracker es un proyecto de codigo abierto disponible para su uso y modificacion. EL copyright y la autoria del material intelctual del proyecto pertencen al Equipo Bongos. Culaquier uso o distribucion debe conservar este aviso y dar credito al Equipo bongos
 
 **Versión:** 1.0  
 **Fecha:** Enero 2026  
