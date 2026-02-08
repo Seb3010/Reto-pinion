@@ -2,7 +2,10 @@
 
 ## Descripción del Proyecto
 
-Este proyecto es una maqueta de ciudad futurista diseñada para el Reto Piñón, una competencia de innovación tecnológica. La maqueta integra tres sistemas principales de automatización y monitoreo en tiempo real, demostrando conceptos de IoT (Internet de las Cosas), automatización residencial y control de tráfico urbano.
+Este proyecto es una maqueta de ciudad futurista diseñada para el Reto Piñón, una competencia de 
+innovación tecnológica. La maqueta integra tres sistemas principales de automatización y monitoreo
+en tiempo real, demostrando conceptos de IoT (Internet de las Cosas), automatización residencial 
+control de tráfico urbano.
 
 ## Sistemas del Proyecto
 
@@ -227,9 +230,7 @@ Proyecto desarrollado para el **Reto Piñón** - Competencia de innovación tecn
 
 ## Licencia
 
-Este proyecto es de código abierto. Puedes modificarlo, distribuirlo y mejorarlo según tus necesidades.
-
----
+TruckTracker es una app de codigo abierto, libre para su uso y modificacion. EL copyright y la autoria del material intelctual del proyecto pertencen al equipo bongos
 
 **Versión:** 1.0  
 **Fecha:** Enero 2026  

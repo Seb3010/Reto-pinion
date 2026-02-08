@@ -1,7 +1,7 @@
 /*
- * =======================================================================================
+
  * SISTEMA DE MONITOREO DE TRANSPORTE PÚBLICO - RETO PIÑÓN
- * =======================================================================================
+
  * 
  * DESCRIPCIÓN:
  * Sistema IoT de monitoreo en tiempo real para transporte público mediante
@@ -28,7 +28,7 @@
  * 
  * CREADO: Enero 2026 - Reto Piñón
  * VERSIÓN: 2.0 - Con comentarios mejorados
- * =======================================================================================
+
  */
 
 // LIBRERÍAS ESPECÍFICAS PARA ESP32
@@ -37,9 +37,9 @@
 #include <WebSocketsServer.h>  // Servidor WebSocket para comunicación en tiempo real
 
 /*
- * =======================================================================================
+
  * DEFINICIÓN DE PINES - ENTRADAS ANALÓGICAS
- * =======================================================================================
+
  * 
  * Los pines GPIO 34 y 35 del ESP32 son ADC (Conversores Analógico-Digital)
  * dedicados, ideales para leer sensores analógicos como joysticks.
@@ -52,9 +52,9 @@ const int PIN_JOYSTICK_Y = 35;  // Pin GPIO 35: Eje Y del joystick (vertical)
                                 // Valores: 0 (arriba) → 4095 (abajo)
 
 /*
- * =======================================================================================
+
  * VARIABLES DE POSICIÓN Y MOVIMIENTO
- * =======================================================================================
+
  * 
  * Estas variables controlan la posición y movimiento del vehículo en el mapa.
  * El sistema opera en un área de 400x400 píxeles con márgenes de seguridad.
@@ -67,9 +67,9 @@ int oldX = 0;    // Posición previa X: para detectar cambios
 int oldY = 0;    // Posición previa Y: para detectar cambios
 
 /*
- * =======================================================================================
+
  * VARIABLES DE TIMING Y COMUNICACIÓN
- * =======================================================================================
+
  */
 
 unsigned long lastUpdate = 0;    // Timestamp de última actualización (para control de frecuencia)
@@ -78,9 +78,9 @@ char bufferEnvio[64];            // Buffer temporal para enviar datos JSON por W
                                   // Formato: "{\"x\":211,\"y\":205}"
 
 /*
- * =======================================================================================
+
  * OBJETOS DE SERVIDORES WEB
- * =======================================================================================
+
  * 
  * El sistema utiliza dos servidores simultáneamente:
  * - WebServer (puerto 80): Para servir la página HTML/CSS/JavaScript inicial
@@ -90,9 +90,9 @@ char bufferEnvio[64];            // Buffer temporal para enviar datos JSON por W
 WebServer server(80);                          // Servidor HTTP estándar para página web inicial
 WebSocketsServer webSocket = WebSocketsServer(81); // Servidor WebSocket para actualizaciones en tiempo real
 /*
- * =======================================================================================
+
  * PÁGINA WEB EMBEDIDA - HTML/CSS/JavaScript
- * =======================================================================================
+
  * 
  * NOTA: Esta página HTML está embebida directamente en el código Arduino.
  * Se almacena en PROGMEM (memoria flash) para no consumir RAM valiosa.
@@ -628,9 +628,9 @@ const char index_html[] PROGMEM = R"rawliteral(
     )rawliteral";
 
 /*
- * =======================================================================================
+
  * FUNCIÓN SETUP - CONFIGURACIÓN INICIAL DEL SISTEMA IoT
- * =======================================================================================
+
  * 
  * Esta función inicializa todos los componentes necesarios para el funcionamiento
  * del sistema de monitoreo de transporte público:
@@ -687,9 +687,9 @@ void setup() {
 }
 
 /*
- * =======================================================================================
+
  * FUNCIÓN LOOP - CICLO PRINCIPAL DE OPERACIÓN
- * =======================================================================================
+
  * 
  * Esta función se ejecuta continuamente y gestiona:
  * - Procesamiento de eventos WebSocket

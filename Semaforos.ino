@@ -1,7 +1,7 @@
 /*
- * =======================================================================================
+
  * SISTEMA DE CONTROL DE SEMÁFOROS - RETO PIÑÓN
- * =======================================================================================
+
  * 
  * DESCRIPCIÓN:
  * Sistema de control automatizado para cruce de avenidas principales:
@@ -21,13 +21,13 @@
  * 
  * CREADO: Enero 2026 - Reto Piñón
  * VERSIÓN: 2.0 - Con comentarios mejorados
- * =======================================================================================
+
  */
 
 /*
- * =======================================================================================
+
  * DEFINICIÓN DE PINES - CONFIGURACIÓN DE HARDWARE
- * =======================================================================================
+
  * 
  * NOTA: Cada semáforo requiere 3 pines digitales independientes
  * - ROJO: Indica detención obligatoria (STOP)
@@ -56,9 +56,9 @@ const int s4_amarillo = 12; // LED Amarillo - Semáforo 4
 const int s4_verde = 13;    // LED Verde - Semáforo 4
 
 /*
- * =======================================================================================
+
  * CONFIGURACIÓN DE TIEMPOS - PARÁMETROS DE OPERACIÓN
- * =======================================================================================
+
  * 
  * Estos tiempos definen la duración de cada fase del ciclo de semáforos.
  * Pueden ajustarse según el flujo vehicular o requerimientos específicos.
@@ -75,9 +75,9 @@ const int tiempo_seguridad = 1000;  // Tiempo de seguridad: 1 segundo (1000 ms)
                                    // Permite que los últimos vehículos crucen completamente
 
 /*
- * =======================================================================================
+
  * FUNCIÓN SETUP - CONFIGURACIÓN INICIAL DEL SISTEMA
- * =======================================================================================
+
  * 
  * Esta función se ejecuta una sola vez al iniciar el sistema.
  * Realiza toda la configuración inicial de hardware y establece
@@ -117,9 +117,9 @@ void setup() {
 }
 
 /*
- * =======================================================================================
+
  * FUNCIÓN LOOP - CICLO PRINCIPAL DE OPERACIÓN
- * =======================================================================================
+
  * 
  * Esta función se ejecuta continuamente en un bucle infinito después de setup().
  * Implementa el ciclo completo de semáforos con dos fases principales y 
@@ -239,9 +239,9 @@ void loop() {
 }
 
 /*
- * =======================================================================================
+
  * FUNCIÓN todosRojo() - ESTADO DE EMERGENCIA Y SEGURIDAD
- * =======================================================================================
+
  * 
  * DESCRIPCIÓN:
  * Función de seguridad crítica que establece TODOS los semáforos en ROJO.

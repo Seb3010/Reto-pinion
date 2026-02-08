@@ -1,7 +1,7 @@
 /*
- * =======================================================================================
+
  * SMART HOUSE - SISTEMA DE AUTOMATIZACIÓN RESIDENCIAL - RETO PIÑÓN
- * =======================================================================================
+
  * 
  * DESCRIPCIÓN:
  * Sistema de automatización para vivienda inteligente que integra:
@@ -23,7 +23,7 @@
  * 
  * CREADO: Enero 2026 - Reto Piñón
  * VERSIÓN: 2.0 - Con comentarios mejorados
- * =======================================================================================
+
  */
 
 // LIBRERÍAS EXTERNAS
@@ -31,9 +31,9 @@
 #include <Servo.h>             // Control de servomotores (PWM)
 
 /*
- * =======================================================================================
+
  * DECLARACIÓN DE OBJETOS Y COMPONENTES
- * =======================================================================================
+
  */
 
 // Display LCD I2C de 16 caracteres x 2 líneas
@@ -45,9 +45,9 @@ Servo myServo_1;    // Servo 2: Ventana de lluvia (Control Automático - Sensor)
 Servo myServo_2;    // Servo 3: Tercer elemento (Control Toggle - Botón Rojo)
 
 /*
- * =======================================================================================
+
  * DEFINICIÓN DE PINES DE CONEXIÓN
- * =======================================================================================
+
  * 
  * Los pines digitales controlan servos y botones.
  * Los pines analógicos leen sensores con valores continuos (0-1023).
@@ -66,9 +66,9 @@ const int SERVO_D_PIN = 10;     // Pin 10: Servo 3 - Tercer elemento/puerta
 const int SENSOR_RAIN_PIN = A1;  // Pin A1: Sensor de lluvia (valores 0-1023)
 
 /*
- * =======================================================================================
+
  * CONFIGURACIÓN DE ÁNGULOS PARA SERVOMOTORES
- * =======================================================================================
+
  * 
  * NOTA: Los ángulos pueden variar según el modelo de servo y montaje mecánico.
  * Se recomienda calibrar estos valores según la instalación específica.
@@ -88,9 +88,9 @@ const int OPEN_ANGLE_D = 100;    // Ángulo de apertura: 100° (elemento abierto
 const int CLOSE_ANGLE_D = 180;   // Ángulo de cierre: 180° (elemento cerrado)
 
 /*
- * =======================================================================================
+
  * CONFIGURACIÓN DE UMBRALES - SISTEMA DE HISTÉRESIS
- * =======================================================================================
+
  * 
  * EXPLICACIÓN DEL SISTEMA DE HISTÉRESIS:
  * El sistema de histéresis evita oscilaciones rápidas del servo cuando el sensor
@@ -115,9 +115,9 @@ const int UMBRAL_LLUVIA_ALTO = 150;  // Umbral superior: 150 (detectar seco)
                                     // Diferencia de 100 unidades entre umbrales
 
 /*
- * =======================================================================================
+
  * VARIABLES DE ESTADO DEL SISTEMA
- * =======================================================================================
+
  * 
  * Estas variables mantienen el estado actual de cada componente y permiten
  * tomar decisiones lógicas basadas en estados previos.
@@ -139,9 +139,9 @@ bool tercer_servo_abierto = false;   // Estado inicial: ELEMENTO CERRADO
                                      // Esencial para funcionamiento tipo toggle/interruptor
 
 /*
- * =======================================================================================
+
  * FUNCIÓN SETUP - CONFIGURACIÓN INICIAL DEL SISTEMA
- * =======================================================================================
+
  * 
  * Esta función se ejecuta una sola vez al iniciar el sistema.
  * Realiza toda la configuración inicial de hardware y establece
@@ -176,9 +176,9 @@ void setup() {
 }
 
 /*
- * =======================================================================================
+
  * FUNCIÓN LOOP - CICLO PRINCIPAL DE OPERACIÓN
- * =======================================================================================
+
  * 
  * Esta función se ejecuta continuamente en un bucle infinito después de setup().
  * Implementa el control en tiempo real de los tres sistemas independientes:
