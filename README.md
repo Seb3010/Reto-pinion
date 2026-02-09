@@ -224,10 +224,6 @@ Reto-pinion/
    - Más sensores (temperatura, luz)
    - Sistema de programación horaria
 
-## Créditos
-
-Proyecto desarrollado para el **Reto Piñón** - Competencia de innovación tecnológica en maquetas de ciudades futuristas.
-
 ## Licencia
 
 TruckTracker es un proyecto de codigo abierto disponible para su uso y modificacion. EL copyright y la autoria del material intelctual del proyecto pertencen al Equipo Bongos. Culaquier uso o distribucion debe conservar este aviso y dar credito al Equipo bongos
