@@ -46,15 +46,16 @@ int prevVelocidad = 0;
 int prevAngulo = 90;
 
 // Umbral para evitar envío excesivo
-const int THRESHOLD_VELOCIDAD = 3;
-const int THRESHOLD_ANGULO = 2;
+const int THRESHOLD_VELOCIDAD = 2;  // Más sensible para respuesta rápida
+const int THRESHOLD_ANGULO = 1;     // Más sensible para respuesta rápida
 const unsigned long HEARTBEAT_MS = 100;  // Envío periódico para mantener enlace activo
 
 // Histeresis motor (evita vibración por ruido cerca del centro)
-const int MOTOR_ENTER_FORWARD = 2220;
-const int MOTOR_EXIT_FORWARD = 2080;
-const int MOTOR_ENTER_REVERSE = 1860;
-const int MOTOR_EXIT_REVERSE = 2000;
+// Ajustado para mayor sensibilidad y enviar valores más altos
+const int MOTOR_ENTER_FORWARD = 2150;  // Reducido para mayor sensibilidad
+const int MOTOR_EXIT_FORWARD = 2050;   // Reducido
+const int MOTOR_ENTER_REVERSE = 1950;  // Aumentado
+const int MOTOR_EXIT_REVERSE = 2050;   // Aumentado
 
 // Zona muerta dedicada para servo
 const int SERVO_DEAD_MIN = 1920;
@@ -148,10 +149,10 @@ void loop() {
 
   if (motorState > 0) {
     int yClamped = constrain(yRaw, MOTOR_EXIT_FORWARD, 4095);
-    velocidadMotor = map(yClamped, MOTOR_EXIT_FORWARD, 4095, 0, 255);
+    velocidadMotor = map(yClamped, MOTOR_EXIT_FORWARD, 4095, 50, 255);  // ↑ mínimo 50 para evitar deadband
   } else if (motorState < 0) {
     int yClamped = constrain(yRaw, 0, MOTOR_EXIT_REVERSE);
-    velocidadMotor = map(yClamped, 0, MOTOR_EXIT_REVERSE, -255, 0);
+    velocidadMotor = map(yClamped, 0, MOTOR_EXIT_REVERSE, -255, -50);  // ↑ máximo -50 para evitar deadband
   } else {
     velocidadMotor = 0;
   }
@@ -184,9 +185,9 @@ void loop() {
     Udp.printf("X:%d\n", anguloServo);
     Udp.endPacket();
 
-    // Debug por Serial USB
-    Serial.printf("UDP enviado - Velocidad: %d (state:%d), Ángulo: %d° (%s)\n",
-                  velocidadMotor, motorState, anguloServo,
+    // Debug por Serial USB (con valores crudos del ADC para diagnóstico)
+    Serial.printf("UDP enviado - Y_raw:%d speed:%d state:%d X_raw:%d angle:%d (%s)\n",
+                  yRaw, velocidadMotor, motorState, xRaw, anguloServo,
                   cambioSignificativo ? "cambio" : "heartbeat");
 
     // Actualizar valores previos
