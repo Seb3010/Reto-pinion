@@ -3,7 +3,7 @@
  * Hardware: L298N (motor) + Servo SG90 + WiFi UDP
  *
  * Conexiones L298N:
- * - ENA → GPIO14 (PWM velocidad)
+ * - ENA → GPIO2 (PWM velocidad, pin seguro en ESP32-S3)
  * - IN1 → GPIO27 (dirección motor)
  * - IN2 → GPIO26 (dirección motor)
  *
@@ -31,9 +31,10 @@ const int udpPort = 4210;              // Puerto UDP
 
 WiFiUDP Udp;
 char packetBuffer[255];                 // Buffer para recibir paquetes UDP
+int packetCount = 0;                   // Contador de paquetes recibidos
 
 // Configuración de pines L298N
-const int PIN_MOTOR_ENA = 14;  // PWM velocidad (pin seguro en ESP32-WROOM-32)
+const int PIN_MOTOR_ENA = 2;  // PWM velocidad (pin seguro en ESP32-S3)
 const int PIN_MOTOR_IN1 = 27;  // Dirección
 const int PIN_MOTOR_IN2 = 26;  // Dirección
 
@@ -66,11 +67,12 @@ const int SERVO_MAX_US = 2500;
 const int SERVO_CENTER_ANGLE = 90;
 
 // Configuración anti-vibración / arranque motor
-const int MOTOR_RX_DEADBAND = 20;      // Comandos pequeños se tratan como 0
-const int MOTOR_MIN_RUN_PWM = 1300;    // PWM mínimo para mantener giro (12-bit)
-const int MOTOR_KICK_PWM = 1700;       // PWM de "empuje" inicial
-const int MOTOR_KICK_MS = 140;         // Duración del empuje inicial
-const int MOTOR_DIR_BRAKE_MS = 40;     // Pausa al cambiar dirección
+// Ajustado para eliminar vibración y asegurar giro estable
+const int MOTOR_RX_DEADBAND = 8;       // Menos deadband = más sensibilidad
+const int MOTOR_MIN_RUN_PWM = 1800;    // Más potencia mínima para vencer inercia
+const int MOTOR_KICK_PWM = 2200;       // Empuje inicial más fuerte
+const int MOTOR_KICK_MS = 180;         // Empuje más largo para asegurar arranque
+const int MOTOR_DIR_BRAKE_MS = 50;     // Freno más efectivo al cambiar dirección
 int motorLastDirection = 0;            // -1 reversa, 0 stop, 1 adelante
 
 /**
@@ -181,17 +183,22 @@ void setMotorSpeed(int speed) {
     delay(MOTOR_DIR_BRAKE_MS);
   }
 
-  // Empuje inicial para vencer inercia
-  if ((motorLastDirection == 0 || direction != motorLastDirection) && appliedPwm < MOTOR_KICK_PWM) {
-    applyMotorDrive(direction, MOTOR_KICK_PWM);
+  // Empuje inicial para vencer inercia (kick siempre al arrancar o cambiar dirección)
+  bool needsKick = (motorLastDirection == 0 && direction != 0) ||
+                   (direction != motorLastDirection && motorLastDirection != 0);
+
+  if (needsKick) {
+    int kickPwm = max(appliedPwm, MOTOR_KICK_PWM);
+    applyMotorDrive(direction, kickPwm);
     delay(MOTOR_KICK_MS);
   }
 
   applyMotorDrive(direction, appliedPwm);
   motorLastDirection = direction;
-  
+
   // Debug
-  Serial.printf("Motor: %d (PWM target:%d applied:%d dir:%d)\n", speed, targetPwm, velocidadPWM, direction);
+  Serial.printf("Motor: %d (PWM target:%d applied:%d dir:%d kick:%s)\n",
+                speed, targetPwm, velocidadPWM, direction, needsKick ? "YES" : "NO");
 }
 
 void setup() {
@@ -274,6 +281,7 @@ void loop() {
 
       lastPacketMs = millis();
       failsafeActivo = false;
+      packetCount++;  // Incrementar contador de paquetes
     }
   }
 
@@ -288,18 +296,20 @@ void loop() {
     Serial.printf("⚠ FAILSAFE activado (sin paquetes por %lu ms)\n", packetAgeMs);
   }
 
-  // Diagnóstico periódico
+  // Diagnóstico periódico mejorado
   static unsigned long lastDiagMs = 0;
   if (millis() - lastDiagMs > 500) {
-    Serial.printf("[DIAG] speed_cmd=%d pwm=%d in1=%d in2=%d angle_cmd=%d pulse_us=%d duty=%d age=%lums\n",
+    bool deadbandActive = (abs(velocidadMotor) <= MOTOR_RX_DEADBAND);
+    Serial.printf("[DIAG] speed=%d pwm=%d in1=%d in2=%d angle=%d pulse=%dus dead=%s age=%lums pkts=%d\n",
                   velocidadMotor,
                   velocidadPWM,
                   digitalRead(PIN_MOTOR_IN1),
                   digitalRead(PIN_MOTOR_IN2),
                   anguloServo,
                   servoPulseUs,
-                  servoPulse,
-                  packetAgeMs);
+                  deadbandActive ? "YES" : "NO",
+                  packetAgeMs,
+                  packetCount);
     lastDiagMs = millis();
   }
 }
