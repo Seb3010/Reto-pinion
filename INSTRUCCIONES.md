@@ -90,6 +90,7 @@ El motor solo vibraba sin girar, a pesar de que el transmisor enviaba señal y s
 - Ajustar parámetros: deadband 8, minPWM 1800, kickPWM 2200
 - Mejorar lógica de kick (se aplica siempre al arrancar)
 - Añadir contador de paquetes y diagnóstico mejorado
+- Corregir API de LEDC: ledcAttachPin() → ledcAttach() (específico para ESP32-S3)
 
 ## Estructura del Proyecto
 - `receiver/receiver.ino` - Sistema principal (WiFi UDP)
@@ -216,6 +217,7 @@ d874d4d feat(receiver): agregar modo test automatico para diagnostico
 3. **Contador de paquetes** (líneas 33, 278): añadido
 4. **Lógica de kick mejorada** (líneas 186-195): se aplica siempre al arrancar
 5. **Diagnóstico mejorado** (líneas 299-312): más información detallada
+6. **API de LEDC corregida** (líneas 218, 223): ledcAttachPin() → ledcAttach() (ESP32-S3)
 
 ### Modo Test (`receiver_test.ino`)
 1. **Test automático de servo** (barrido 60-120°)
@@ -224,6 +226,7 @@ d874d4d feat(receiver): agregar modo test automatico para diagnostico
 4. **Test de cambio de dirección con freno**
 5. **Reporte final de diagnóstico** en texto plano
 6. **Parámetros ajustables** al inicio del archivo
+7. **API de LEDC corregida** (líneas 333, 337): ledcAttachPin() → ledcAttach() (ESP32-S3)
 
 ---
 
