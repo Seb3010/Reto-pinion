@@ -212,15 +212,13 @@ void setup() {
   pinMode(PIN_MOTOR_IN2, OUTPUT);
   digitalWrite(PIN_MOTOR_IN1, LOW);
   digitalWrite(PIN_MOTOR_IN2, LOW);
-  
+
   // Configurar LEDC para el motor PWM
-  ledcSetup(LEDC_MOTOR_CHANNEL, LEDC_MOTOR_FREQ, LEDC_MOTOR_RESOLUTION);
-  ledcAttach(PIN_MOTOR_ENA, LEDC_MOTOR_CHANNEL);
+  ledcAttach(PIN_MOTOR_ENA, LEDC_MOTOR_FREQ, LEDC_MOTOR_RESOLUTION);
   ledcWrite(LEDC_MOTOR_CHANNEL, 0); // Iniciar detenido
 
   // Configurar LEDC para el servo PWM
-  ledcSetup(LEDC_SERVO_CHANNEL, LEDC_SERVO_FREQ, LEDC_SERVO_RESOLUTION);
-  ledcAttach(PIN_SERVO, LEDC_SERVO_CHANNEL);
+  ledcAttach(PIN_SERVO, LEDC_SERVO_FREQ, LEDC_SERVO_RESOLUTION);
   
   // Arrancar seguro con motor detenido
   setMotorSpeed(0);
