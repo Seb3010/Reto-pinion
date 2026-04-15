@@ -330,11 +330,11 @@ void setup() {
 
   // Configurar LEDC
   ledcSetup(LEDC_MOTOR_CHANNEL, LEDC_MOTOR_FREQ, LEDC_MOTOR_RESOLUTION);
-  ledcAttachPin(PIN_MOTOR_ENA, LEDC_MOTOR_CHANNEL);
+  ledcAttach(PIN_MOTOR_ENA, LEDC_MOTOR_CHANNEL);
   ledcWrite(LEDC_MOTOR_CHANNEL, 0);
 
   ledcSetup(LEDC_SERVO_CHANNEL, LEDC_SERVO_FREQ, LEDC_SERVO_RESOLUTION);
-  ledcAttachPin(PIN_SERVO, LEDC_SERVO_CHANNEL);
+  ledcAttach(PIN_SERVO, LEDC_SERVO_CHANNEL);
 
   // Esperar 5 segundos
   for (int i = 5; i > 0; i--) {
